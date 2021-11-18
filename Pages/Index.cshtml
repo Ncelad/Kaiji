@@ -1,0 +1,39 @@
+﻿@page
+@model IndexModel
+@using Kaiji.Pages
+@using Microsoft.AspNetCore.Hosting
+@inject IWebHostEnvironment environment
+@inject SignInManager<KaijiUser> SignInManager
+
+<div class="d-flex flex-row container flex-row flex-wrap">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        IndexModel.instance.CurrentUser = User;
+        IndexModel.instance.IsSignedIn = true;
+        IndexModel.instance.OnGet();
+    }
+    else
+    {
+        IndexModel.instance.CurrentUser = User;
+        IndexModel.instance.IsSignedIn = false;
+        IndexModel.instance.projects = null;
+    }
+    @if (IndexModel.instance.projects != null)
+    {
+        foreach (var item in IndexModel.instance.projects)
+        {
+            <div class="project-item d-flex flex-column m-2">
+                <h2 class="pl-3 title">@item.Title</h2>
+                <p class="pl-3">@item.Description</p>
+            </div>
+        }
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <a class="text-dark mr-2 title" style="font-size: 8vw" asp-area="" asp-page="CreateProject">
+                <div class="project-item d-flex flex-column justify-content-center align-items-center m-2">
+                    <span>+</span>
+                </div>
+            </a>    
+        }
+    }
+</div>
