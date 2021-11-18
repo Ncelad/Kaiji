@@ -2,6 +2,7 @@
 @model IndexModel
 @using Kaiji.Pages
 @using Microsoft.AspNetCore.Hosting
+@using Newtonsoft.Json 
 @inject IWebHostEnvironment environment
 @inject SignInManager<KaijiUser> SignInManager
 
@@ -22,10 +23,12 @@
     {
         foreach (var item in IndexModel.instance.projects)
         {
-            <div class="project-item d-flex flex-column m-2">
+            Dictionary<string, string> dict = new Dictionary<string, string>() { { "obj", JsonConvert.SerializeObject(item) } };
+                
+            <a class="project-item d-flex flex-column text-dark m-2" asp-page="ProjectEdit" asp-all-route-data="dict">
                 <h2 class="pl-3 title">@item.Title</h2>
                 <p class="pl-3">@item.Description</p>
-            </div>
+            </a>
         }
         @if (SignInManager.IsSignedIn(User))
         {

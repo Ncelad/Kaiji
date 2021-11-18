@@ -38,6 +38,10 @@ p{
     font-size: 1.5vw;
 }
 
+a:hover{
+    text-decoration: none;
+}
+
 .project-item {
     width: 25vw;
     height: 20vw;
