@@ -23,7 +23,7 @@
     {
         foreach (var item in IndexModel.instance.projects)
         {
-            Dictionary<string, string> dict = new Dictionary<string, string>() { { "obj", JsonConvert.SerializeObject(item) } };
+            Dictionary<string, string> dict = new Dictionary<string, string>() { { "id", item.Id.ToString() } };
                 
             <a class="project-item d-flex flex-column text-dark m-2" asp-page="ProjectEdit" asp-all-route-data="dict">
                 <h2 class="pl-3 title">@item.Title</h2>

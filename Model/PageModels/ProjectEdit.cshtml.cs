@@ -11,11 +11,34 @@ namespace Kaiji.Pages
 {
     public class ProjectEditModel : PageModel
     {
-        private Project currentProject = null; 
+        public int CurrentProjectId;
+        public List<Row> rows = null;
+        public List<Card> cards = null;
 
-        public IActionResult OnGet(string obj)
+        public IActionResult OnGet(string id)
         {
-            currentProject = JsonConvert.DeserializeObject<Project>(obj); 
+            if (Url.IsLocalUrl("/ProjectEdit"))
+            {
+                CurrentProjectId = Convert.ToInt32(id);
+                List<Row> r = new List<Row>();
+                List<Card> c = new List<Card>();
+                foreach (var item in Repository.Read<Row>())
+                {
+                    if(item.ProjectId == CurrentProjectId)
+                    {
+                        r.Add(item);
+                        foreach (var jtem in Repository.Read<Card>())
+                        {
+                            if (jtem.RowId == item.Id)
+                            {
+                                c.Add(jtem);
+                            }
+                        }
+                    }
+                }
+                cards = c;
+                rows = r;
+            }
             return Page();
         }
     }

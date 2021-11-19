@@ -36,6 +36,7 @@ html {
 }
 p{
     font-size: 1.5vw;
+    font-weight: 100;
 }
 
 a:hover{
@@ -50,13 +51,43 @@ a:hover{
     margin: 0;
 }
 
+.row-item {
+    width: 20vw;
+    height: auto;
+    border: 0.25vw solid #d8d8d8;
+    border-radius: 1vw;
+    margin: 0;
+}
+
+.card-item {
+    width: 18vw;
+    height: auto;
+    border: 0.25vw solid #d8d8d8;
+    border-radius: 1vw;
+    margin: 0;
+}
+
 .project-item:hover{
+    border: 0.25vw solid #000;
+    border-radius: 1vw;
+}
+
+.row-item:hover {
+    border: 0.25vw solid #000;
+    border-radius: 1vw;
+}
+
+.card-item:hover {
     border: 0.25vw solid #000;
     border-radius: 1vw;
 }
 
 .title {
     font-size: 3vw;
+    font-weight: 200;
+}
+.card-item .title {
+    font-size: 1.5vw;
     font-weight: 100;
 }
 

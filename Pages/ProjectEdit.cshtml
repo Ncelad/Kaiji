@@ -1,6 +1,36 @@
 ﻿@page
-@model Kaiji.Pages.ProjectEditModel
+@using Kaiji.Pages
+@model ProjectEditModel
 
-    <p>
-        Ok
-    </p>
+<div class="d-flex container flex-wrap flex-row">
+    @foreach (var item in @Model.rows)
+    {
+    <div class="row-item d-flex flex-column text-dark m-2">
+        <h2 class="pl-3 title">@item.Title</h2>
+        @foreach (var jtem in @Model.cards)
+        {
+            if (jtem.RowId == item.Id)
+            {
+                <div class="card-item d-flex flex-column text-dark m-2" id="1">
+                    <h2 class="pl-1 title">@jtem.Title</h2>
+                    <p class="pl-1">@jtem.Description</p>
+                </div>
+            }
+        }
+        @{Dictionary<string, string> dict1 = new Dictionary<string, string>() { { "RowId", item.Id.ToString() }, { "ProjId", item.ProjectId.ToString() } };
+            <a class="text-dark mr-2 title" style="font-size: 3vw" asp-page="CreateCard" asp-all-route-data="dict1">
+                <div class="card-item d-flex flex-column justify-content-center align-items-center m-2">
+                    <span>+</span>
+                </div>
+            </a>
+        }
+    </div>
+    }
+    @{Dictionary<string, string> dict2 = new Dictionary<string, string>() { { "id", @Model.CurrentProjectId.ToString() } }; 
+    <a class="text-dark mr-2 title" style="font-size: 3vw" asp-page="CreateRow" asp-all-route-data="dict2">
+        <div class="row-item d-flex flex-column justify-content-center align-items-center m-2" style="height: 80vh; font-size: 8vw;">
+            <span>+</span>
+        </div>
+    </a>
+    }
+</div>
